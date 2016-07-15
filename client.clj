@@ -12,6 +12,7 @@
          m_open = false;
          m_done = false;
          m_client.clear_access_channels(websocketpp::log::alevel::all);
+         m_client.clear_error_channels(websocketpp::log::alevel::all);
          m_client.init_asio();
          using websocketpp::lib::placeholders::_1;
          using websocketpp::lib::bind;
