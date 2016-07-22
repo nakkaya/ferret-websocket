@@ -1,3 +1,7 @@
+(native-header "websocketpp/config/asio_no_tls.hpp"
+               "websocketpp/client.hpp"
+               "websocketpp/common/thread.hpp")
+
 (defobject WSClient
   (data "typedef websocketpp::client<websocketpp::config::asio> client;"
         "typedef websocketpp::lib::lock_guard<websocketpp::lib::mutex> scoped_lock;"
@@ -59,9 +63,6 @@
 
 (defnative connect-aux [server]
   (on "defined FERRET_STD_LIB"
-      ("websocketpp/config/asio_no_tls.hpp"
-       "websocketpp/client.hpp"
-       "websocketpp/common/thread.hpp")
       "__result = obj<WSClient>(server);"))
 
 (defn connect [server]
