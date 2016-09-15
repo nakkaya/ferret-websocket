@@ -24,7 +24,7 @@
          m_client.set_close_handler(bind(&WSClient::on_close,this,_1));
          m_client.set_fail_handler(bind(&WSClient::on_fail,this,_1));"))
   (equals "return obj<Boolean>(this == o.cast<WSClient>());")
-  (stream_console "fprintf(FERRET_OUTPUT_STREAM, \"WSClient\"); return nil();")
+  (stream_console "fprintf(FERRET_STD_OUT, \"WSClient\"); return nil();")
   (fns
    ("void on_open" "websocketpp::connection_hdl hdl"
     "scoped_lock guard(m_lock);
