@@ -66,8 +66,9 @@
       "__result = obj<WSClient>(server);"))
 
 (defn connect [server]
-  (let [client (connect-aux server)]
-    (thread (fn [] "client.cast<WSClient>()->run();"))
+  (let [client (connect-aux server)
+        run (fn [c] "c.cast<WSClient>()->run();")]
+    (thread #(run client))
     client))
 
 (defn connected? [conn]
