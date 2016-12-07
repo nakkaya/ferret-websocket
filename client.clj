@@ -40,7 +40,10 @@
 
    ("void run" ""
     "websocketpp::lib::error_code ec;
-     client::connection_ptr con = m_client.get_connection(url.cast<String>()->to_string(), ec);
+     std::string server = url.cast<String>()->to_string();
+     client::connection_ptr con = m_client.get_connection(server, ec);
+     std::string origin = \"http\" + server.substr(2);
+     con->replace_header(\"Origin\",origin);
      m_hdl = con->get_handle();
      m_client.connect(con);
      m_client.run();")
