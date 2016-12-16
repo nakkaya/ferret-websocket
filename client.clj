@@ -40,7 +40,7 @@
 
    ("void run" ""
     "websocketpp::lib::error_code ec;
-     std::string server = url.cast<String>()->to_string();
+     std::string server = url.to<std::string>();
      client::connection_ptr con = m_client.get_connection(server, ec);
      std::string origin = \"http\" + server.substr(2);
      con->replace_header(\"Origin\",origin);
@@ -56,7 +56,7 @@
     "scoped_lock guard(m_lock);
      websocketpp::lib::error_code ec;
      std::stringstream val;
-     val << msg.cast<String>()->to_string();
+     val << msg.to<std::string>();
      m_client.send(m_hdl, val.str(), websocketpp::frame::opcode::text, ec);
      if (ec){
        std::cout << \"Send Error: \" << ec.message() << std::endl;
