@@ -23,8 +23,8 @@
          m_client.set_open_handler(bind(&WSClient::on_open,this,_1));
          m_client.set_close_handler(bind(&WSClient::on_close,this,_1));
          m_client.set_fail_handler(bind(&WSClient::on_fail,this,_1));"))
-  (equals "return obj<Boolean>(this == o.cast<WSClient>());")
-  (stream_console "fprintf(FERRET_STD_OUT, \"WSClient\"); return nil();")
+  (equals "return obj<boolean>(this == o.cast<WSClient>());")
+  (stream_console "runtime::print(\"WSClient\"); return nil();")
   (fns
    ("void on_open" "websocketpp::connection_hdl hdl"
     "scoped_lock guard(m_lock);
@@ -40,7 +40,7 @@
 
    ("void run" ""
     "websocketpp::lib::error_code ec;
-     std::string server = url.to<std::string>();
+     std::string server = string::to<std::string>(url);
      client::connection_ptr con = m_client.get_connection(server, ec);
      std::string origin = \"http\" + server.substr(2);
      con->replace_header(\"Origin\",origin);
@@ -50,13 +50,13 @@
 
    ("var isOpen" ""
     "scoped_lock guard(m_lock);
-     return obj<Boolean>(m_open && !m_done);")
+     return obj<boolean>(m_open && !m_done);")
 
    ("var send" "var conn, var msg"
     "scoped_lock guard(m_lock);
      websocketpp::lib::error_code ec;
      std::stringstream val;
-     val << msg.to<std::string>();
+     val << string::to<std::string>(msg);
      m_client.send(m_hdl, val.str(), websocketpp::frame::opcode::text, ec);
      if (ec){
        std::cout << \"Send Error: \" << ec.message() << std::endl;
