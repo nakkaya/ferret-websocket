@@ -27,12 +27,11 @@ class ws_client_o : public object_t {
 
   size_t type() const { return runtime::type::ws_client_o; }
 
-  bool equals(var o) const { return obj<boolean>(this == o.cast<ws_client_o>()); }
+  bool equals(var const & o) const { return obj<boolean>(this == o.cast<ws_client_o>()); }
 
 #if !defined(FERRET_DISABLE_STD_OUT)
-  var stream_console() const {
+  void stream_console() const {
     runtime::print("ws_client_o");
-    return nil();
   }
 #endif
 
