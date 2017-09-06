@@ -1,4 +1,4 @@
-class ws_client_o : public object_t {
+class ws_client_o : public object {
   
   typedef websocketpp::client<websocketpp::config::asio> client;
   typedef websocketpp::lib::lock_guard<websocketpp::lib::mutex> scoped_lock;
