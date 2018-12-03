@@ -25,9 +25,7 @@ class ws_client_o : public object {
     m_client.set_fail_handler(bind(&ws_client_o::on_fail, this, _1));
   }
 
-  size_t type() const { return runtime::type::ws_client_o; }
-
-  bool equals(var const & o) const { return obj<boolean>(this == o.cast<ws_client_o>()); }
+  type_t type() const final { return type_id<ws_client_o>; }
 
 #if !defined(FERRET_DISABLE_STD_OUT)
   void stream_console() const {
